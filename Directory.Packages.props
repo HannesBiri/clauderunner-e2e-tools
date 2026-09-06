@@ -1,0 +1,11 @@
+<Project>
+  <!--
+    Without this file, MSBuild's search for Directory.Packages.props walks up past this repository root and picks
+    up the one belonging to the ClaudeRunner host checkout that happens to contain this worktree, which enables
+    central package management this repository does not use and breaks restore. Stopping the search here with
+    central management explicitly off keeps this repository self-contained regardless of where it is checked out.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>
