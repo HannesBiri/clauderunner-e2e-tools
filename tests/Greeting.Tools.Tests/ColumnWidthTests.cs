@@ -47,4 +47,20 @@ public class ColumnWidthTests
 
         Assert.Equal($"a   bb  ccc{Environment.NewLine}d{Environment.NewLine}ee  ff", rendered);
     }
+
+    [Fact]
+    public void RendersSingleCellRowsAsPlainLines()
+    {
+        var rendered = TextTable.Render([["a"], ["bb"], ["ccc"]]);
+
+        Assert.Equal($"a{Environment.NewLine}bb{Environment.NewLine}ccc", rendered);
+    }
+
+    [Fact]
+    public void PadsAnEmptyStringCellLikeAnyOtherCell()
+    {
+        var rendered = TextTable.Render([["a", "bb"], ["", "d"]]);
+
+        Assert.Equal($"a  bb{Environment.NewLine}   d", rendered);
+    }
 }
