@@ -1,9 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!--
+    Packable so GreetingService can consume it the way a real estate does: as a published NuGet, not a project
+    reference. That is what creates a write edge between the two repositories — GreetingService cannot build
+    against a change here until this package is packed, published and its version recorded.
+  -->
+  <PropertyGroup>
+    <PackageId>Greeting.Tools.Core</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>ClaudeRunner end-to-end test</Authors>
+    <Description>Plain-text rendering helpers for command-line greetings.</Description>
   </PropertyGroup>
 
 </Project>
