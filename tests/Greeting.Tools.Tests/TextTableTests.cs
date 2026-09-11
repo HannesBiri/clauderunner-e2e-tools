@@ -35,4 +35,30 @@ public class TextTableTests
 
         Assert.Equal($"aaa  b  c{Environment.NewLine}d", rendered);
     }
+
+    [Fact]
+    public void HeaderLongerThanEveryCellWidensTheColumn()
+    {
+        var rendered = TextTable.Render(["Name", "b"], [["a", "d"]]);
+
+        Assert.Equal($"Name  b{Environment.NewLine}a     d", rendered);
+    }
+
+    [Fact]
+    public void HeaderWithNoRowsRendersJustTheHeaderLine()
+    {
+        var rendered = TextTable.Render(["Name", "Greeting"], []);
+
+        Assert.Equal("Name  Greeting", rendered);
+    }
+
+    [Fact]
+    public void HeaderOverloadEndsShortRowsEarlyWithoutThrowing()
+    {
+        var rendered = TextTable.Render(["Name", "Greeting", "Extra"], [["a"], ["bb", "c"]]);
+
+        Assert.Equal(
+            $"Name  Greeting  Extra{Environment.NewLine}a{Environment.NewLine}bb    c",
+            rendered);
+    }
 }
