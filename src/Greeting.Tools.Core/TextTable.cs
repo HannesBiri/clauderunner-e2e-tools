@@ -6,6 +6,17 @@ public static class TextTable
     /// <summary>One line per row, columns padded to the widest cell and separated by two spaces.</summary>
     public static string Render(IEnumerable<IReadOnlyList<string>> rows) => Layout(rows.ToList());
 
+    /// <summary>
+    /// The header renders as the first line, padded and separated by the same rules as a data row, and takes
+    /// part in the column width calculation alongside the rows below it.
+    /// </summary>
+    public static string Render(IReadOnlyList<string> header, IEnumerable<IReadOnlyList<string>> rows)
+    {
+        var lines = new List<IReadOnlyList<string>> { header };
+        lines.AddRange(rows);
+        return Layout(lines);
+    }
+
     private static string Layout(IReadOnlyList<IReadOnlyList<string>> lines)
     {
         var widths = new List<int>();
